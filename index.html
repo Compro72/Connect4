@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Connect 4 Multiplayer</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://unpkg.com/netplayjs@0.4.1/dist/netplay.js"></script>
+</head>
+<body>
+    <div id="board"></div>
+    <button id="startGame">Start Game</button>
+    <div id="win"></div>
+    <script src="main.js"></script>
+    <script>
+        window.addEventListener('load', () => {
+            if (typeof Netplay !== 'undefined') {
+                console.log('NetplayJS loaded successfully');
+            } else {
+                console.log('NetplayJS not loaded');
+            }
+        });
+    </script>
+</body>
+</html>
