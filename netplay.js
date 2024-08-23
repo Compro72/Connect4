@@ -20159,7 +20159,7 @@ class GameMenu {
         this.stopHostListening();
         // Send the match request and update UI to put
         // as in the matchmaking state.
-        this.matchmaker.sendMatchRequest(this.gameURL, 2, 2);
+        this.matchmaker.sendMatchRequest(this.gameURL, 2, 4);
         this.updateState({
             kind: "searching-for-matches",
         });
