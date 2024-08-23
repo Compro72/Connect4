@@ -50,6 +50,7 @@ class SimpleGame extends netplayjs.Game {
   draw(canvas) {
     const ctx = canvas.getContext("2d");
     ctx.canvas.id = "myCanvas";
+    ctx.canvas.requestFullscreen();
 
     // Fill with black.
     ctx.fillStyle = "black";
