@@ -7,7 +7,7 @@ document.getElementById("startGame").addEventListener('click', () => {
 	createBoard();
 });
 
-const netplay = new Netplay({
+class SimpleGame extends netplayjs.Game({
 	gameId: 'connect4',
 	numPlayers: 2,
 	onConnect: (player) => {
