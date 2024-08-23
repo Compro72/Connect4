@@ -53,7 +53,7 @@ class SimpleGame extends netplayjs.Game {
     ctx.canvas.requestFullscreen();
 
     // Fill with black.
-    ctx.fillStyle = "black";
+    ctx.fillStyle = "white";
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
     // Draw squares for the players.
@@ -65,7 +65,7 @@ class SimpleGame extends netplayjs.Game {
 }
 
 SimpleGame.timestep = 1000 / 60; // Our game runs at 60 FPS
-SimpleGame.canvasSize = { width: window.outerWidth, height: window.outerHeight };
+SimpleGame.canvasSize = { width: 600, height: 300 };
 
 // Because our game can be easily rewound, we will use Rollback netcode
 // If your game cannot be rewound, you should use LockstepWrapper instead.
