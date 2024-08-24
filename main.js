@@ -16,6 +16,9 @@ let board = [];
 let currentTurn = 1;
 let winner = false;
 
+document.getElementById("main").style.width = window.outerWidth;
+document.getElementById("main").style.height = window.outerHeight;
+
 function createBoard() {
 	document.getElementById("main").requestFullscreen();
 	for(let i=0; i<6; i++) {
