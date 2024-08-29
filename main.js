@@ -16,11 +16,9 @@ let board = [];
 let currentTurn = 1;
 let winner = false;
 
-document.getElementById("main").style.width = window.outerWidth;
-document.getElementById("main").style.height = window.outerHeight;
+createBoard();
 
 function createBoard() {
-	document.getElementById("main").requestFullscreen();
 	for(let i=0; i<6; i++) {
 		board.push([]);
 		for(let j=0; j<7; j++) {
@@ -79,7 +77,27 @@ function checkWin() {
 					}
 				}
 			}
+
 		}
 	}
 	return false;
+}
+
+window.onload = updateSize;
+window.onresize = updateSize;
+
+function updateSize() {
+	if((window.innerHeight * (7/6)) < window.innerWidth) {
+		document.getElementById("board").style.width = (window.innerHeight*0.75) * (7/6) + "px";
+		for(let i=0; i<42; i++) {
+			document.getElementById("board").children[i].style.width = (window.innerHeight*0.125)-2 + "px";
+			document.getElementById("board").children[i].style.height = (window.innerHeight*0.125)-2 + "px";
+		}
+	} else {
+		document.getElementById("board").style.width = (window.innerWidth*0.75) + "px";
+		for(let i=0; i<42; i++) {
+			document.getElementById("board").children[i].style.width = (window.innerWidth*0.75)/7-2 + "px";
+			document.getElementById("board").children[i].style.height = (window.innerWidth*0.75)/7-2 + "px";
+		}
+	}
 }
