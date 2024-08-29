@@ -6,68 +6,123 @@
     <title>Connect 4 Multiplayer</title>
     <link rel="stylesheet" href="style.css">
     <script src="https://unpkg.com/netplayjs@0.4.1/dist/netplay.js"></script>
+    <script src="https://unpkg.com/konva@9/konva.min.js"></script>
 </head>
 <body>
-    <div id="main">
-        <h1>Connect 4<h1>
+    <div id="container">
         <div id="board"></div>
         <div id="win"></div>
     </div>
 
 
+<script>/*
+let ctx;
 
-
-<script>
 class connectFour extends netplayjs.Game {
-  // In the constructor, we initialize the state of our game.
-  constructor() {
-    super();
-    // Initialize our player positions.
-    createBoard();
-  }
-
-  // The tick function takes a map of Player -> Input and
-  // simulates the game forward. Think of it like making
-  // a local multiplayer game with multiple controllers.
-  tick(playerInputs) {
-    for (const [player, input] of playerInputs.entries()) {
-      // Generate player velocity from input keys.
-      const vel = input.arrowKeys();
-
-      // Apply the velocity to the appropriate player.
-      if (player.getID() == 0) {
-        this.aPos.x += vel.x * 5;
-        this.aPos.y -= vel.y * 5;
-      } else if (player.getID() == 1) {
-        this.bPos.x += vel.x * 5;
-        this.bPos.y -= vel.y * 5;
-      }
-      console.log(player.getID() + "mau");
+// In the constructor, we initialize the state of our game.
+    constructor() {
+        super();
+        // Initialize our player positions.
+        board
     }
-  }
+    
+    // The tick function takes a map of Player -> Input and
+    // simulates the game forward. Think of it like making
+    // a local multiplayer game with multiple controllers.
+    tick(playerInputs) {
+        for (const [player, input] of playerInputs.entries()) {
+            // Generate player velocity from input keys.
+            const vel = input.arrowKeys();
 
-  // Normally, we have to implement a serialize / deserialize function
-  // for our state. However, there is an autoserializer that can handle
-  // simple states for us. We don't need to do anything here!
-  // serialize() {}
-  // deserialize(value) {}
+            // Apply the velocity to the appropriate player.
+            if (player.getID() == 0) {
+            } else if (player.getID() == 1) {
+            }
+        }
+    }
 
-  // Draw the state of our game onto a canvas.
-  draw(canvas) {
-    console.log(this.aPos);
-    ctx.fillStyle = "blue";
-    ctx.fillRect(this.bPos.x - 5, this.bPos.y - 5, 10, 10);
-    console.log(this.bPos);
+    // Normally, we have to implement a serialize / deserialize function
+    // for our state. However, there is an autoserializer that can handle
+    // simple states for us. We don't need to do anything here!
+    // serialize() {}
+    // deserialize(value) {}
+
+    // Draw the state of our game onto a canvas.
+    draw(canvas) {
+        console.clear();
+        ctx = canvas.getContext("2d");
+        var elem = ctx.canvas;
+
+        ctx.canvas.requestFullscreen();
+
+        // Fill with black.
+        ctx.fillStyle = "black";
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+        // Draw squares for the board.
+        ctx.fillStyle = "grey";
+        for(let i=0; i<6; i++) {
+            for(let j=0; j<7; j++) {
+                ctx.fillRect(j*60+392, i*60+150, 56, 56);
+            }
+        }
+        ctx.font = "50px Arial";
+        ctx.fillText("Connect 4", 480, 100);
+
+        // check if context exist
+if (elem && elem.getContext) {
+    // list of rectangles to render
+    var rects = [{x: 0, y: 0, w: 50, h: 50},
+                 {x: 75, y: 0, w: 50, h: 50}];
+  // get context
+  var context = elem.getContext('2d');
+  if (context) {
+
+      for (var i = 0, len = rects.length; i < len; i++) {
+        context.fillRect(rects[i].x, rects[i].y, rects[i].w, rects[i].h);
+      }
+
   }
+    
+    // listener, using W3C style for example    
+    elem.addEventListener('click', function(e) {
+        var rect = collides(rects, e.offsetX, e.offsetY);
+        if (rect) {
+            window.alert('collision: ' + rect.x + '/' + rect.y);
+        } else {
+            window.alert('no collision');
+        }
+    }, false);
+}
+    }
 }
 
 connectFour.timestep = 1000 / 60; // Our game runs at 60 FPS
-connectFour.canvasSize = { width: 0, height: 0 };
+connectFour.canvasSize = { width: 1200, height: 600 };
+
+
+function collides(rects, x, y) {
+    var isCollision = false;
+    for (var i = 0, len = rects.length; i < len; i++) {
+        var left = rects[i].x, right = rects[i].x+rects[i].w;
+        var top = rects[i].y, bottom = rects[i].y+rects[i].h;
+        if (right >= x
+            && left <= x
+            && bottom >= y
+            && top <= y) {
+            isCollision = rects[i];
+        }
+    }
+    return isCollision;
+}
+
 
 // Because our game can be easily rewound, we will use Rollback netcode
 // If your game cannot be rewound, you should use LockstepWrapper instead.
-new netplayjs.RollbackWrapper(connectFour).start();
+new netplayjs.RollbackWrapper(connectFour).start();*/
 </script>
+
+
     <script src="main.js"></script>
 </body>
 </html>
