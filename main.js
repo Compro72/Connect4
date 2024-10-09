@@ -15,14 +15,13 @@
 let board = [];
 let currentTurn = 1;
 let winner = false;
-
-createBoard();
+let shared;
 
 function createBoard() {
 	for(let i=0; i<6; i++) {
-		board.push([]);
+		shared.board.push([]);
 		for(let j=0; j<7; j++) {
-			board[i].push(0);
+			shared.board[i].push(0);
 			element = document.createElement("div");
 			element.id = "cell" + i + j;
 			element.classList.add('cell');
@@ -38,16 +37,17 @@ function move(event) {
 	if(!winner) {
 		column = event.target.dataset.column;
 		for(let i=5; i>-1; i--) {
-			if(board[i][column] === 0) {
-				board[i][column] = currentTurn;
-				document.getElementById("cell" + i + column).classList.add(currentTurn===1 ? "red" : "yellow");
-				if(checkWin()) {
-					currentTurn===1 ? document.getElementById("win").innerText = "Red Wins!" : document.getElementById("win").innerText = "Yellow Wins!";
-					winner = true;
+			if()
+				if(shared.board[i][column] === 0) {
+					shared.board[i][column] = currentTurn;
+					document.getElementById("cell" + i + column).classList.add(currentTurn===1 ? "red" : "yellow");
+					if(checkWin()) {
+						currentTurn===1 ? document.getElementById("win").innerText = "Red Wins!" : document.getElementById("win").innerText = "Yellow Wins!";
+						winner = true;
+					}
+					currentTurn===1 ? currentTurn=2 : currentTurn=1;
+					return;
 				}
-				currentTurn===1 ? currentTurn=2 : currentTurn=1;
-				return;
-			}
 		}
 	}
 }
@@ -55,24 +55,24 @@ function move(event) {
 function checkWin() {
 	for(let i=5; i>-1; i--) {
 		for(let j=0; j<7; j++) {
-			if(board[i][j]===currentTurn) {
+			if(shared.board[i][j]===currentTurn) {
 				if(j<4) {
-					if(board[i][j+1] === currentTurn && board[i][j+2] === currentTurn && board[i][j+3] === currentTurn) {
+					if(shared.board[i][j+1] === currentTurn && shared.board[i][j+2] === currentTurn && shared.board[i][j+3] === currentTurn) {
 						return true;
 					}
 				}
 				if(i>2) {
-					if(board[i-1][j] === currentTurn && board[i-2][j] === currentTurn && board[i-3][j] === currentTurn) {
+					if(shared.board[i-1][j] === currentTurn && shared.board[i-2][j] === currentTurn && shared.board[i-3][j] === currentTurn) {
 						return true;
 					}
 				}
 				if(j<4 && i>2) {
-					if(board[i-1][j+1] === currentTurn && board[i-2][j+2] === currentTurn && board[i-3][j+3] === currentTurn) {
+					if(shared.board[i-1][j+1] === currentTurn && shared.board[i-2][j+2] === currentTurn && shared.board[i-3][j+3] === currentTurn) {
 						return true;
 					}
 				}
 				if(j>2 && i>2) {
-					if(board[i-1][j-1] === currentTurn && board[i-2][j-2] === currentTurn && board[i-3][j-3] === currentTurn) {
+					if(shared.board[i-1][j-1] === currentTurn && shared.board[i-2][j-2] === currentTurn && shared.board[i-3][j-3] === currentTurn) {
 						return true;
 					}
 				}
@@ -100,4 +100,19 @@ function updateSize() {
 			document.getElementById("board").children[i].style.height = (window.innerWidth*0.75)/7-2 + "px";
 		}
 	}
+}
+
+function preload() {
+	partyConnect("wss://demoserver.p5party.org", "hello_party");
+	shared = partyLoadShared("shared");
+	createBoard();
+}
+
+function setup() {
+  // set defaults on shared data
+  shared.board = shared.board || [[0,0,0,0,0,0,0],[0,0,0,0,0,0,0],[0,0,0,0,0,0,0],[0,0,0,0,0,0,0],[0,0,0,0,0,0,0],[0,0,0,0,0,0,0],[0,0,0,0,0,0,0]];
+}
+
+function draw() {
+	
 }
