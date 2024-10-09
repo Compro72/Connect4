@@ -37,7 +37,7 @@ function move(event) {
 	if(!winner) {
 		column = event.target.dataset.column;
 		for(let i=5; i>-1; i--) {
-			if()
+			if(true) {
 				if(shared.board[i][column] === 0) {
 					shared.board[i][column] = currentTurn;
 					document.getElementById("cell" + i + column).classList.add(currentTurn===1 ? "red" : "yellow");
@@ -48,6 +48,7 @@ function move(event) {
 					currentTurn===1 ? currentTurn=2 : currentTurn=1;
 					return;
 				}
+			}
 		}
 	}
 }
