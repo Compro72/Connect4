@@ -28,6 +28,9 @@ function draw() {
 			document.getElementById("win").innerText = "Yellow Wins!";
 			shared.winner = true;
 		}
+		if (!shared.winner) {
+			document.getElementById("win").innerText = "";
+		}
 	}
 }
 
@@ -135,6 +138,8 @@ function updateBoard() {
 			if (!document.getElementById("cell" + row + col).classList.contains(shared.board[row][col] == 1 ? "red" : "yellow")) {
 				document.getElementById("cell" + row + col).classList.add(shared.board[row][col] == 1 ? "red" : "yellow");
 			}
+		} else if (shared.board[row][col] == 0 && (document.getElementById("cell" + row + col).classList.contains("red") || document.getElementById("cell" + row + col).classList.contains("yellow"))) {
+			document.getElementById("cell" + row + col).classList.remove(document.getElementById("cell" + row + col).classList[1]);
 		}
 	}
 }
